@@ -37,7 +37,7 @@ def generate_launch_description():
                                     node_executable='lslidar_driver_node',
                                     node_name='lslidar_driver_node',
                                     output='screen',
-                                    parameters=[driver_dir_left],
+                                    parameters=[driver_dir_right],
                                     )
 
 

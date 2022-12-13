@@ -407,7 +407,7 @@ namespace lslidar_driver {
                 fPutTheMirrorOffAngle = -1;  //todo 0.6
                 break;
             case 3:
-                fPutTheMirrorOffAngle = -2;  //todo -1.4
+                fPutTheMirrorOffAngle = -3;  //todo -1.4
                 break;
             default:
                 fPutTheMirrorOffAngle = -1.4;
@@ -469,6 +469,7 @@ namespace lslidar_driver {
             auto startTime = system_clock::now();
             double packet_interval_time =
                     (current_packet_time - last_packet_time) / (POINTS_PER_PACKET_SINGLE_ECHO / 8.0);
+
             for (size_t point_idx = 0; point_idx < POINTS_PER_PACKET_SINGLE_ECHO; point_idx += 8) {
                 if ((msg->data[point_idx] == 0xff) && (msg->data[point_idx + 1] == 0xaa) &&
                     (msg->data[point_idx + 2] == 0xbb) && (msg->data[point_idx + 3] == 0xcc) &&
@@ -480,6 +481,10 @@ namespace lslidar_driver {
                         point_time =
                                 packet_end_time -
                                 packet_interval_time * ((POINTS_PER_PACKET_SINGLE_ECHO - point_idx) / 8 - 1);
+                        point_time = point_time < 0.0 ? 0.0 : point_time;
+                        if (point_time <0.0) {
+                            RCLCPP_INFO(this->get_logger(), "point_time: %.9f",point_time);
+                        }
                     } else {
                         point_time = current_packet_time;
                     }

@@ -40,13 +40,13 @@ source install/setup.bash
 运行单个雷达:
 
 ~~~bash
-roslaunch lslidar_driver lslidar_ls128.launch
+ros2 launch lslidar_driver lslidar_ls128.launch
 ~~~
 
 运行多个雷达：
 
 ~~~bash
-roslaunch lslidar_driver lslidar_ls128_double.launch
+ros2 launch lslidar_driver lslidar_ls128_double.launch
 ~~~
 
 ## 4.参数介绍

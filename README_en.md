@@ -56,13 +56,13 @@ source install/setup.bash
 run with single lidar:
 
 ~~~bash
-roslaunch lslidar_driver lslidar_ls128.launch
+ros2 launch lslidar_driver lslidar_ls128.launch
 ~~~
 
 run with double lidar:
 
 ~~~bash
-roslaunch lslidar_driver lslidar_ls128_double.launch
+ros2 launch lslidar_driver lslidar_ls128_double.launch
 ~~~
 
 ## 4. Introduction to parameters

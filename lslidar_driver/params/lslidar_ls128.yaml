@@ -6,7 +6,7 @@
     frame_id: laser_link
     add_multicast: false
     group_ip: 224.1.1.2
-    time_synchronization: false
+    time_synchronization: true
     min_range: 0.3
     max_range: 500.0
     distance_unit: 0.4
