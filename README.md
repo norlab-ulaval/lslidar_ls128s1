@@ -1,7 +1,7 @@
 # LSLIDAR_LS128_ROS_V1.0.1_221128_ROS2使用说明
 
 ## 1.工程介绍
-​		LSLIDAR_LS128_ROS_V1.0.1_221128_ROS2为linux环境下雷达ros驱动，适用于ls128,ls25d雷达，程序在ubuntu 20.04 ros foxy和ubuntu 20.04 ros galactic下测试通过。
+​		LSLIDAR_LS128_ROS_V1.0.1_221128_ROS2为linux环境下雷达ros驱动，适用于ls128,ls25d,ls180雷达，程序在ubuntu 20.04 ros foxy和ubuntu 20.04 ros galactic下测试通过。
 
 ## 2.依赖
 

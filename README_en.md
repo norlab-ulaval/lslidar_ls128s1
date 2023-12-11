@@ -1,7 +1,7 @@
 # LSLIDAR_LS128_ROS_V1.0.1_221128_ROS2
 
 ## 1.Introduction
-​		LSLIDAR_LS128_ROS_V1.0.1_221128_ROS2 is the lidar ros driver in linux environment, which is suitable for LS128 and LS25D  lidar. The program has  tested under ubuntu18.04 ros dashing , ubuntu18.04 ros eloquent, ubuntu 20.04 ros foxy , ubuntu 20.04 ros galactic and ubuntu 22.04 ros humble .
+​		LSLIDAR_LS128_ROS_V1.0.1_221128_ROS2 is the lidar ros driver in linux environment, which is suitable for LS25D, LS128 series and LS180 series lidars. The program has  tested under ubuntu18.04 ros dashing , ubuntu18.04 ros eloquent, ubuntu 20.04 ros foxy , ubuntu 20.04 ros galactic and ubuntu 22.04 ros humble .
 
 ## 2.Dependencies
 
