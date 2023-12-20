@@ -1,31 +1,30 @@
-# LSLIDAR_LS128_ROS_V1.0.1_221128_ROS2使用说明
+# LSLIDAR_LS128_ROS_V1.0.1_221128_ROS2 User Guide
 
-## 1.工程介绍
-​		LSLIDAR_LS128_ROS_V1.0.1_221128_ROS2为linux环境下雷达ros驱动，适用于ls128,ls25d,ls180雷达，程序在ubuntu 20.04 ros foxy和ubuntu 20.04 ros galactic下测试通过。
+## 1. Project Introduction
+LSLIDAR_LS128_ROS_V1.0.1_221128_ROS2 is a ROS (Robot Operating System) driver for LIDAR sensors in a Linux environment. It is compatible with ls128, ls25d, and ls180 LIDAR devices. The program has been tested on Ubuntu 20.04 with ROS Foxy and Ubuntu 20.04 with ROS Galactic.
 
-## 2.依赖
+## 2. Dependencies
 
-1.ubuntu 20.04 ros foxy/ubuntu 20.04 ros galactic
-
-2.ros依赖
+1. **Ubuntu 20.04 with ROS Foxy/Ubuntu 20.04 with ROS Galactic**
+2. **ROS Dependencies**
 
 ```bash
-# 安装
-sudo apt-get install ros-$ROS_DISTRO-pcl-ros ros-$ROS_DISTRO-pluginlib  ros-$ROS_DISTRO-pcl-conversions  
+# Installation
+sudo apt-get install ros-$ROS_DISTRO-pcl-ros ros-$ROS_DISTRO-pluginlib ros-$ROS_DISTRO-pcl-conversions
 ```
 
-3.其他依赖
+3. Other dependencies
 
-~~~bash
+```bash
 sudo apt-get install libpcap-dev
 sudo apt-get install libboost${BOOST_VERSION}-dev   #选择适合的版本
-~~~
+```
 
 
 
-## 3.编译运行
-
-### 3.1 编译
+## 3. Compilation and Execution
+   
+### 3.1 Compilation
 
 ~~~bash
 mkdir -p ~/lidar_ws/src
@@ -35,67 +34,65 @@ colcon build
 source install/setup.bash
 ~~~
 
-### 3.2 运行
+### 3.2 Execution
 
-运行单个雷达:
+Run a single LIDAR:
 
 ~~~bash
 ros2 launch lslidar_driver lslidar_ls128.launch
 ~~~
 
-运行多个雷达：
+Run multiple LIDARs:
 
 ~~~bash
 ros2 launch lslidar_driver lslidar_ls128_double.launch
 ~~~
 
-## 4.参数介绍
+## 4. Parameter Description
 
-lslidar_ls128.yaml文件内容如下，每个参数含义见注释说明。
+The content of the lslidar_ls128.yaml file is as follows, with each parameter explained in the comments.
 
 ~~~bash
 /ls128/lslidar_driver_node:
   ros__parameters:
-    device_ip: 192.168.1.200          #雷达ip
-    msop_port: 2368                   #数据包目的端口
-    difop_port: 2369                  #设备包目的端口
-    frame_id: laser_link              #坐标系id
-    add_multicast: false              #是否开启组播模式
-    group_ip: 224.1.1.2               #组播ip地址
-    time_synchronization: false       #雷达是否使用gps或ptp授时，使用改为true
-    min_range: 0.3                    #单位，米。雷达盲区最小值，小于此值的点被过滤
-    max_range: 500.0                  #单位，米。雷达盲区最大值 ，大于此值的点被过滤
-    scan_start_angle: -60              # 起始角度，范围[-60,60]
-    scan_end_angle: 60                # 结束角度，范围[-60,60]
-    scan_num: 15                       #laserscan线号
-    publish_scan: false               #是否发布scan
-    topic_name: lslidar_point_cloud   #点云话题名称，可修改
-    #pcap: /home/ls/work/fuhong/data/ls128/20221012-ntp.pcap                        #pcap包路径，加载pcap包时打开此注释
+    device_ip: 192.168.1.200          # LIDAR IP
+    msop_port: 2368                   # Data packet destination port
+    difop_port: 2369                  # Device packet destination port
+    frame_id: laser_link              # Coordinate frame ID
+    add_multicast: false              # Enable multicast mode
+    group_ip: 224.1.1.2               # Multicast IP address
+    time_synchronization: false       # Whether the LIDAR uses GPS or PTP time synchronization, set to true if yes
+    min_range: 0.3                    # Unit: meters. Minimum value of LIDAR blind zone, points below this value are filtered
+    max_range: 500.0                  # Unit: meters. Maximum value of LIDAR blind zone, points above this value are filtered
+    scan_start_angle: -60              # Starting angle, range: [-60,60]
+    scan_end_angle: 60                # Ending angle, range: [-60,60]
+    scan_num: 15                       # Laser scan lines
+    publish_scan: false               # Whether to publish scan data
+    topic_name: lslidar_point_cloud   # Point cloud topic name, can be modified
+    # pcap: /home/ls/work/fuhong/data/ls128/20221012-ntp.pcap                        # Path to pcap file, uncomment this line when loading pcap file
 ~~~
 
-### 组播模式：
+## Multicast Mode:
 
-- 上位机设置雷达开启组播模式
-
-- 修改launch文件以下参数
+* Set the LIDAR to enable multicast mode on the host computer.
+* Modify the launch file with the following parameters:
 
   ~~~shell
-  add_multicast: true                    #是否开启组播模式。
-  group_ip: 224.1.1.2                    #组播ip地址
+add_multicast: true                    # Enable multicast mode.
+group_ip: 224.1.1.2                    # Multicast IP address
   ~~~
 
-- 运行以下指令将电脑加入组内（将指令中的enp2s0替换为用户电脑的网卡名,可用ifconfig查看网卡名)
-
+* Run the following command to add the computer to the group (replace enp2s0 with the user's computer network card name, check the network card name with ifconfig):
+  
   ~~~shell
   ifconfig
   sudo route add -net 224.0.0.0/4 dev enp2s0
   ~~~
 
 
+## Offline PCAP Mode:
 
-### 离线pcap模式：
-
-- 修改launch文件以下参数
+Modify the launch file with the following parameters:
 
   ~~~shell
   #取消注释
@@ -107,19 +104,19 @@ lslidar_ls128.yaml文件内容如下，每个参数含义见注释说明。
 
 Bug Report
 
-Original version : LSLIDAR_LS128_ROS_V1.0.1_221012_ROS2
+Original version: LSLIDAR_LS128_ROS_V1.0.1_221012_ROS2
 
-Modify:  original version
+Modification: Original version
 
-Date    : 2022-10-12
+Date: 2022-10-12
 
 ----------------
 
-Original version : LSLIDAR_LS128_ROS_V1.0.1_221128_ROS2
+Original version: LSLIDAR_LS128_ROS_V1.0.1_221128_ROS2
 
-Modify:  1.fpga版本升级，修改点云计算公式
+Modifications: 
+1. FPGA version upgrade, modification of point cloud calculation formula
+​2. Added support for ROS2 Humble, ROS2 Dashing, and ROS2 Eloquent
 
-​                2.新增对ros2 humble, ros2 dashing, ros2 eloquent的支持
-
-Date    : 2022-11-28
+Date: 2022-11-28
 
