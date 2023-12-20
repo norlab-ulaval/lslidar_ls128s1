@@ -77,17 +77,17 @@ The content of the lslidar_ls128.yaml file is as follows, with each parameter ex
 * Set the LIDAR to enable multicast mode on the host computer.
 * Modify the launch file with the following parameters:
 
-  ~~~shell
+~~~bash
 add_multicast: true                    # Enable multicast mode.
 group_ip: 224.1.1.2                    # Multicast IP address
-  ~~~
+~~~
 
 * Run the following command to add the computer to the group (replace enp2s0 with the user's computer network card name, check the network card name with ifconfig):
   
-  ~~~shell
-  ifconfig
-  sudo route add -net 224.0.0.0/4 dev enp2s0
-  ~~~
+~~~shell
+ifconfig
+sudo route add -net 224.0.0.0/4 dev enp2s0
+~~~
 
 
 ## Offline PCAP Mode:
