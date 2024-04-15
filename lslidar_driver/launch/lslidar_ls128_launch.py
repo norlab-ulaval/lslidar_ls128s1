@@ -29,13 +29,13 @@ def generate_launch_description():
                                     output='screen',
                                     parameters=[driver_dir],
                                     )
-        rviz_node = Node(
-            package='rviz2',
-            node_namespace='ls128',
-            node_executable='rviz2',
-            node_name='rviz2',
-            arguments=['-d', rviz_dir],
-            output='screen')
+#        rviz_node = Node(
+#            package='rviz2',
+#            node_namespace='ls128',
+#            node_executable='rviz2',
+#            node_name='rviz2',
+#            arguments=['-d', rviz_dir],
+#            output='screen')
     elif ros_version == b'foxy\n' or ros_version == b'galactic\n' or ros_version == b'humble\n':
         print("ROS VERSION: foxy/galactic/humble")
         driver_node = LifecycleNode(package='lslidar_driver',
@@ -46,18 +46,18 @@ def generate_launch_description():
                                     emulate_tty=True,
                                     parameters=[driver_dir],
                                     )
-        rviz_node = Node(
-            package='rviz2',
-            namespace='ls128',
-            executable='rviz2',
-            name='rviz2',
-            arguments=['-d', rviz_dir],
-            output='screen')
+#        rviz_node = Node(
+#            package='rviz2',
+#            namespace='ls128',
+#            executable='rviz2',
+#            name='rviz2',
+#            arguments=['-d', rviz_dir],
+#            output='screen')
 
     else:
         print("Please configure the ros environment")
         exit()
 
     return LaunchDescription([
-        driver_node, rviz_node
+        driver_node#, rviz_node
     ])

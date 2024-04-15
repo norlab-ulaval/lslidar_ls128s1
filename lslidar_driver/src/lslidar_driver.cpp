@@ -59,7 +59,7 @@ namespace lslidar_driver {
 
     bool lslidarDriver::loadParameters() {
         this->declare_parameter<std::string>("frame_id", "laser_link");
-        this->declare_parameter<std::string>("device_ip", "192.168.1.200");
+        this->declare_parameter<std::string>("device_ip", "192.168.1.201");
         this->declare_parameter<bool>("add_multicast", false);
         this->declare_parameter<std::string>("group_ip", "234.2.3.2");
         this->declare_parameter<int>("msop_port", 2368);
